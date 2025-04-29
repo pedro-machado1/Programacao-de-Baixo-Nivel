@@ -51,13 +51,6 @@ int main(){
     {
         matrizRGB[i] = (struct RGB *)malloc(coluna * sizeof(struct RGB));    
     }
-
-    struct RGB **matrizinversa = (struct RGB **)malloc(coluna * sizeof(struct RGB *));
-    for (i = 0; i < coluna; i++) 
-    {
-        matrizinversa[i] = (struct RGB *)malloc(linha * sizeof(struct RGB));    
-    }
-
     
   	
   	fscanf(fp, "%d", &val);  
