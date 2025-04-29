@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 int main(){ 
 
     char document[50];
-    printf("Digite o nome para a imagem que deseja editar ");
+    printf("Digite o nome da imagem que deseja editar ");
     scanf("%s",document);
     printf("%s\n", document);
     
@@ -13,7 +14,7 @@ int main(){
   	fp = fopen(document,"r");
 	if(fp==NULL){
 		printf("Erro ao abrir o arquivo!");
-        return 0;
+        return 1;
 		}
   	char tipoImg[3];
 
@@ -24,19 +25,19 @@ int main(){
   	
   	fscanf(fp, "%d %d", &coluna, &linha);   
   	printf("%d %d\n", coluna, linha);
- //   if (coluna < 400 || linha < 400){
-   //     printf("imagem é muito pequena");
-    //    return 0;
-   // }
+    if (coluna < 400 || linha < 400){
+        printf("Imagem deve ser pelo menos 400 X 400 pixeis");
+        return 1;
+    }
 
-      int **matriz;
+    int **matriz;
  
-      matriz = malloc (linha * sizeof (int *));
+    matriz = malloc (linha * sizeof (int *));
       
-      for (int i = 0; i < linha; ++i)
-      {
-         matriz[i] = malloc (coluna * sizeof (int));
-      }
+    for (int i = 0; i < linha; ++i)
+    {
+        matriz[i] = malloc (coluna * sizeof (int));
+    }
       
     struct RGB
 {
@@ -61,8 +62,8 @@ int main(){
   	printf("%d\n", val);
 
     int opcao;
-    printf("Digite 1 se quer gerar uma imagem tons de cinza\n Digite 2 se que gerar uma imagem negatina \n Digite 3 se quer gerar uma imagem raio-x \nDigite 4 se quer gerar uma imagem envelhecida (sepia)\n Digite 5 se quer gerar uma imagem 90 graus \n Digite 6 se que rotacionar a imagem em 180 graus \n");
-    printf("Digite o numero da opcao que voce deseja: ");
+    printf("Digite 1 se quer gerar uma imagem tons de cinza\n Digite 2 se que gerar uma imagem negatina \n Digite 3 se quer gerar uma imagem raio-x \nDigite 4 se quer gerar uma imagem envelhecida \n Digite 5 se quer gerar uma imagem rotacionada em 90 graus \n Digite 6 se que rotacionar a imagem em 180 graus \n");
+    printf("Digite o valor da alternativa que voce deseja: ");
     scanf("%i", &opcao);
     switch (opcao)
     {
@@ -133,7 +134,7 @@ int main(){
                 fscanf(fp, "%d %d %d", &r, &g, &b);
                 
                 matriz[j][i] = (r*0.299)+(g*0.587)+(b*0.114);
-                matriz[j][i] = fmin(pow(matriz[j][i], 1.5), 255);
+                matriz[j][i] = fmin(pow(matriz[j][i], 1.2),255);
             }
         }
 
@@ -250,7 +251,7 @@ int main(){
 
             break;
         default:    
-            printf("por favor coloque um numero valido");
+            printf("Por favor coloque um valor permitido");
             return 1;
             break;
     }
