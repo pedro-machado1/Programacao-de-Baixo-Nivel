@@ -1,3 +1,5 @@
+// autor: Pedro Jardim Machado 24102560
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -16,7 +18,7 @@ int main(){
 		printf("Erro ao abrir o arquivo!");
         return 1;
     }
-  	char tipoImg[3];
+  	char tipoImg[2];
 
   	int i, j, linha, coluna, val, r, g, b;
   	
