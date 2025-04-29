@@ -15,7 +15,7 @@ int main(){
 	if(fp==NULL){
 		printf("Erro ao abrir o arquivo!");
         return 1;
-		}
+    }
   	char tipoImg[3];
 
   	int i, j, linha, coluna, val, r, g, b;
@@ -40,9 +40,9 @@ int main(){
     }
       
     struct RGB
-{
-    int R, G, B;
-};
+    {
+        int R, G, B;
+    };
 
     struct RGB **matrizRGB = (struct RGB **)malloc(linha * sizeof(struct RGB *));
     for (i = 0; i < linha; i++) 
@@ -127,34 +127,34 @@ int main(){
 
                 break;
         case 3:
-        for(j=0; j<linha; j++)
-        {
-            for(i=0; i<coluna; i++)
+            for(j=0; j<linha; j++)
             {
-                fscanf(fp, "%d %d %d", &r, &g, &b);
-                
-                matriz[j][i] = (r*0.299)+(g*0.587)+(b*0.114);
-                matriz[j][i] = fmin(pow(matriz[j][i], 1.2),255);
-            }
-        }
-
-        fclose(fp);
-
-        FILE *fp_novo3 = fopen ("arquivoModificado.ppm", "w");
-        
-        fprintf (fp_novo3, "P2\n");
-        fprintf (fp_novo3, "%d %d\n", coluna, linha);
-        fprintf (fp_novo3, "%d\n", val);
-
-        for(j=0; j<linha; j++)
-        {
                 for(i=0; i<coluna; i++)
-                {  	
-                    fprintf(fp_novo3, "%d\n" , matriz[j][i]);
+                {
+                    fscanf(fp, "%d %d %d", &r, &g, &b);
+                    
+                    matriz[j][i] = (r*0.299)+(g*0.587)+(b*0.114);
+                    matriz[j][i] = fmin(pow(matriz[j][i], 1.2),255);
                 }
-        }
-        fclose(fp_novo3); 
-        break;
+            }
+
+            fclose(fp);
+
+            FILE *fp_novo3 = fopen ("arquivoModificado.ppm", "w");
+            
+            fprintf (fp_novo3, "P2\n");
+            fprintf (fp_novo3, "%d %d\n", coluna, linha);
+            fprintf (fp_novo3, "%d\n", val);
+
+            for(j=0; j<linha; j++)
+            {
+                    for(i=0; i<coluna; i++)
+                    {  	
+                        fprintf(fp_novo3, "%d\n" , matriz[j][i]);
+                    }
+            }
+            fclose(fp_novo3); 
+            break;
         case 4:
             for(j=0; j<linha; j++)
             {
